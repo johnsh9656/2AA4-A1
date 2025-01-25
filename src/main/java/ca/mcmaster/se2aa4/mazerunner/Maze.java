@@ -7,7 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Maze  {
-    private static final Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger(Maze.class);
 
     private ArrayList<ArrayList<Integer>> maze = new ArrayList<>();
     private final Position entry;
@@ -27,7 +27,7 @@ public class Maze  {
         parameters - file path
         returns - 2D arraylist of maze
     */
-    public ArrayList<ArrayList<Integer>> parseMaze(String filePath) throws Exception {
+    public ArrayList<ArrayList<Integer>> parseMaze(String filePath) throws Exception{
         logger.info("**** Reading the maze from file " + filePath);  
         BufferedReader reader = new BufferedReader(new FileReader(filePath)); // reads from retreived file
         String line;
@@ -35,29 +35,46 @@ public class Maze  {
             ArrayList<Integer> mazeRow = new ArrayList<>();
             for (int idx = 0; idx < line.length(); idx++) {
                 if (line.charAt(idx) == '#') {
-                    mazeRow.add(0);
+                    mazeRow.add(0); // wall
                 } else if (line.charAt(idx) == ' ') {
-                    mazeRow.add(1);
+                    mazeRow.add(1); // passage
                 }
             }
-            maze.add(mazeRow);
+                maze.add(mazeRow);
         }
         return maze;
     }
 
     /*  returns entry position of the maze
     */
-    public Position findEntry(){
-        Position pos = new Position(0,0);
-        // implement logic to find entry position
+    public Position findEntry() {
+        Position pos = null;
+        for(int row = 0; row < maze.size(); row++){
+            Integer val = maze.get(row).get(0); 
+            
+            if(val == 1){
+                pos = new Position(row,0);
+                break;
+            }
+        }
+        logger.info("Found entrance at position: (" + pos.getX() + "," + pos.getY() + ")");
         return pos;
     }
 
     /*  returns exit position of the maze
     */ 
-    public Position findExit(){
-        Position pos = new Position(0,0);
-        // implement logic to find exit position
+    public Position findExit() {
+        Position pos = null;
+        int mazeWidth = maze.size()-1;
+        for(int row = 0; row < maze.size(); row++){ 
+            Integer val = maze.get(row).get(mazeWidth); 
+            
+            if(val == 1){
+                pos = new Position(row,mazeWidth);
+                break;
+            }
+        }
+        logger.info("Found exit at position: (" + pos.getX() + "," + pos.getY() + ")");
         return pos;
     }
 
@@ -65,7 +82,19 @@ public class Maze  {
         parameters - x and y coordinates
         returns - value at position (0 or 1 for wall or path)
     */
-    public Integer get(int x, int y){
+    public Integer getValue(int x, int y){
         return maze.get(x).get(y);
+    }
+
+    /*  prints maze in 2d format
+     */
+    public void printMaze(){
+        for(ArrayList<Integer> rows : maze){
+            for(Integer val : rows){
+                System.out.print(val + " ");
+            }
+            System.out.println(); 
+        }
+            
     }
 }

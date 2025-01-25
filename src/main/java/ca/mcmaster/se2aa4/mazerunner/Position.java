@@ -6,7 +6,7 @@ public class Position {
 
     public Position(int x, int y){
         this.x = x;
-        this.y = x;
+        this.y = y;
     }
 
     public int getX(){
@@ -23,5 +23,13 @@ public class Position {
 
     public void setY(int newY){
         this.y = newY;
+    }
+
+    public boolean equals(Position pos){
+        return this.x == pos.getX() && this.y == pos.getY();
+    }
+
+    public void print(){
+        System.out.println("(" + this.x + ", " + this.y + ")");
     }
 }

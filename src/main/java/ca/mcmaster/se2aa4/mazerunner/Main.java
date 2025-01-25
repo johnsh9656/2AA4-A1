@@ -28,11 +28,14 @@ public class Main {
             Solver solver = new Solver();
             Path path = solver.solve(maze);
 
+            maze.printMaze();
+
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
+            logger.error(e.getMessage());
         }
         logger.info("**** Computing path");
-        logger.error("PATH NOT COMPUTED");
+        //logger.error("PATH NOT COMPUTED");
         logger.info("** End of MazeRunner");
     }
 }
