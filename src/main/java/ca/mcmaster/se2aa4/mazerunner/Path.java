@@ -1,17 +1,21 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 public class Path {
-    private String path;
+    private StringBuilder path;
 
     public Path(){
-        
+        this.path = new StringBuilder();
     }
 
-    public String getCanonicalPath(){
+    public void addInstruction(String instruct){
+        path.append(instruct);
+    }
+
+    public StringBuilder getCanonicalPath(){
         return this.path;
     }
 
-    public String getFactorizedPath(){
+    public StringBuilder getFactorizedPath(){
         return this.path;
     }
 }

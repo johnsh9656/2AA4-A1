@@ -13,7 +13,7 @@ public class DirectionManager {
         SOUTH
     }
     public DirectionManager(){
-        currentDir = startingDir;
+        this.currentDir = startingDir;
     }
     public Direction turnRight(){
         switch(currentDir){

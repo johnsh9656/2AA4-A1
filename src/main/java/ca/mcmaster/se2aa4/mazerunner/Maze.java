@@ -78,6 +78,14 @@ public class Maze  {
         return pos;
     }
 
+    public Position getEntry() {
+        return this.entry;
+    }
+
+    public Position getExit() {
+        return this.exit;
+    }
+
     /*  returns value at position in range of maze
         parameters - x and y coordinates
         returns - value at position (0 or 1 for wall or path)
