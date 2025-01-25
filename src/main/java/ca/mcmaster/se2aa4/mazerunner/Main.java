@@ -27,6 +27,7 @@ public class Main {
             Maze maze = new Maze(filePath);
             Solver solver = new Solver();
             Path path = solver.solve(maze);
+            System.out.println("Canonical path: " + path.getCanonicalPath());
 
             maze.printMaze();
 
