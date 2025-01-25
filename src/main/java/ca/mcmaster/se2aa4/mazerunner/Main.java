@@ -1,8 +1,5 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +15,7 @@ public class Main {
         Option fileOption = new Option("i", true, "File that contains maze");
         fileOption.setRequired(true);
         options.addOption(fileOption);
+        options.addOption(new Option("p", true, "Maze path to be verified"));
 
         CommandLineParser parser = new DefaultParser();
 
@@ -26,18 +24,10 @@ public class Main {
             String filePath = cmd.getOptionValue("i");
             logger.info("Reading the maze from file " + filePath);
 
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                for (int idx = 0; idx < line.length(); idx++) {
-                    if (line.charAt(idx) == '#') {
-                        logger.debug("WALL ");
-                    } else if (line.charAt(idx) == ' ') {
-                        logger.debug("PASS ");
-                    }
-                }
-                logger.debug(System.lineSeparator());
-            }
+            Maze maze = new Maze(filePath);
+            Solver solver = new Solver();
+            Path path = solver.solve(maze);
+
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
