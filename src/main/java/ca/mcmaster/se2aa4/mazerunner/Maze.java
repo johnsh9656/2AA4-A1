@@ -94,6 +94,10 @@ public class Maze  {
         return maze.get(x).get(y);
     }
 
+    public boolean isWall(Position pos) {
+        return maze.get(pos.getX()).get(pos.getY()) == 0;
+    }
+
     /*  prints maze in 2d format
      */
     public void printMaze(){
