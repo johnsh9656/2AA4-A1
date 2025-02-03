@@ -12,24 +12,31 @@ public class Position {
     public int getX(){
         return this.x;
     }
-
     public int getY(){
         return this.y;
     }
 
-    public void setX(int newX){
-        this.x = newX;
-    }
-
-    public void setY(int newY){
-        this.y = newY;
+    public Position move(Direction direction) {
+        switch(direction){
+            case NORTH:
+                return new Position(this.x, this.y - 1);
+            case EAST:
+                return new Position(this.x + 1, this.y);
+            case WEST:
+                return new Position(this.x - 1, this.y);
+            case SOUTH:
+                return new Position(this.x, this.y + 1);
+            default:
+                throw new IllegalStateException("Unexpected value: " + direction);
+        }
     }
 
     public boolean equals(Position pos){
         return this.x == pos.getX() && this.y == pos.getY();
     }
 
-    public void print(){
-        System.out.println("(" + this.x + ", " + this.y + ")");
+    @Override
+    public String toString(){
+        return "(" + this.x + ", " + this.y + ")";
     }
 }
