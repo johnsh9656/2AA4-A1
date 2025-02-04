@@ -22,21 +22,25 @@ public class Main {
         try {
             CommandLine cmd = parser.parse(options, args);
             String filePath = cmd.getOptionValue("i");
-            logger.info("Reading the maze from file " + filePath);
-
             Maze maze = new Maze(filePath);
-            MazeSolver solver = new RightHandSolver();
-            Path path = solver.solve(maze);
-            System.out.println("Found factorized path: " + path.getFactorizedPath());
 
-            maze.printMaze();
-
+            if (cmd.getOptionValue("p") != null) {
+                Path path = new Path(cmd.getOptionValue("p"));
+                if (maze.validatePath(path)) {
+                    System.out.println("Path is valid");
+                } else {
+                    System.out.println("Path is invalid");
+                }
+            } else {
+                MazeSolver solver = new RightHandSolver();
+                Path path = solver.solve(maze);
+                System.out.println("Found factorized path: " + path.getFactorizedPath());
+            }
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
             logger.error(e.getMessage());
         }
-        logger.info("**** Computing path");
-        //logger.error("PATH NOT COMPUTED");
+        
         logger.info("** End of MazeRunner");
     }
 }

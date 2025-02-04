@@ -3,6 +3,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -103,7 +104,40 @@ public class Maze  {
                 System.out.print(val + " ");
             }
             System.out.println(); 
+        } 
+    }
+
+    public boolean validatePath(Path path) {
+        Position currentPos = this.entry;
+        DirectionManager directionManager = new DirectionManager();
+
+        for (char c : path.getPathInstructions().toCharArray()) {
+            switch (c) {
+                case 'F':
+                    currentPos = currentPos.move(directionManager.getCurrentDir());
+
+                    if (currentPos.getX() >= this.maze.getFirst().size() || 
+                        currentPos.getY() >= this.maze.size() || 
+                        currentPos.getX() < 0 || currentPos.getY() < 0) {
+                        // out of bounds
+                        return false;
+                    }
+
+                    if (isWall(currentPos)) {
+                        // hit a wall
+                        return false;
+                    }
+                    break;
+                case 'R':
+                    directionManager.setCurrentDir(directionManager.turnRight());
+                    break;
+                case 'L':
+                    directionManager.setCurrentDir(directionManager.turnLeft());
+                    break;
+                default:
+                    return false;
+            }
         }
-            
+        return currentPos.equals(this.exit);
     }
 }

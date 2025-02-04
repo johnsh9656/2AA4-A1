@@ -7,8 +7,16 @@ public class Path {
         this.path = new StringBuilder();
     }
 
+    public Path(String path) {
+        this.path = new StringBuilder(path);
+    }
+
     public void addInstruction(String instruct){
         path.append(instruct);
+    }
+
+    public String getPathInstructions() {
+        return path.toString();
     }
 
     public String getCanonicalPath(){
