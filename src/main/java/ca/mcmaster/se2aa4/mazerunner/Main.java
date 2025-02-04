@@ -27,7 +27,7 @@ public class Main {
             Maze maze = new Maze(filePath);
             MazeSolver solver = new RightHandSolver();
             Path path = solver.solve(maze);
-            System.out.println("Found canonical path: " + path.getCanonicalPath());
+            System.out.println("Found factorized path: " + path.getFactorizedPath());
 
             maze.printMaze();
 
