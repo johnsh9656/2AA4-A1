@@ -40,42 +40,39 @@ public class Maze  {
                     mazeRow.add(1); // passage
                 }
             }
-                maze.add(mazeRow);
+            maze.add(mazeRow);
         }
         return maze;
     }
 
     /*  returns entry position of the maze
-    */
-    public Position findEntry() {
-        Position pos = null;
+     * throws exception if no entrance found
+     */
+    public Position findEntry() throws Exception {
         for(int row = 0; row < maze.size(); row++){
-            Integer val = maze.get(row).get(0); 
+            Position pos = new Position(0, row);
             
-            if(val == 1){
-                pos = new Position(row,0);
-                break;
+            if (!isWall(pos)) {
+                logger.info("Found entrance at position: " + pos);
+                return pos;
             }
         }
-        logger.info("Found entrance at position: (" + pos.getX() + "," + pos.getY() + ")");
-        return pos;
+        throw new Exception("No entrance found in maze");
     }
 
     /*  returns exit position of the maze
-    */ 
-    public Position findExit() {
-        Position pos = null;
-        int mazeWidth = maze.size()-1;
-        for(int row = 0; row < maze.size(); row++){ 
-            Integer val = maze.get(row).get(mazeWidth); 
+     * throws exception if no exit found
+     */ 
+    public Position findExit() throws Exception {
+        for(int row = 0; row < maze.size(); row++){
+            Position pos = new Position(maze.getFirst().size() - 1, row);
             
-            if(val == 1){
-                pos = new Position(row,mazeWidth);
-                break;
+            if (!isWall(pos)) {
+                logger.info("Found entrance at position: (" + pos.getX() + "," + pos.getY() + ")");
+                return pos;
             }
         }
-        logger.info("Found exit at position: (" + pos.getX() + "," + pos.getY() + ")");
-        return pos;
+        throw new Exception("No entrance found in maze");
     }
 
     public Position getEntry() {
@@ -95,7 +92,7 @@ public class Maze  {
     }
 
     public boolean isWall(Position pos) {
-        return maze.get(pos.getX()).get(pos.getY()) == 0;
+        return maze.get(pos.getY()).get(pos.getX()) == 0;
     }
 
     /*  prints maze in 2d format
