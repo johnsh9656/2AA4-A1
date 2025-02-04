@@ -54,7 +54,6 @@ public class Maze  {
             Position pos = new Position(0, row);
             
             if (!isWall(pos)) {
-                logger.info("Found entrance at position: " + pos);
                 return pos;
             }
         }
@@ -69,7 +68,6 @@ public class Maze  {
             Position pos = new Position(maze.getFirst().size() - 1, row);
             
             if (!isWall(pos)) {
-                logger.info("Found entrance at position: (" + pos.getX() + "," + pos.getY() + ")");
                 return pos;
             }
         }
