@@ -16,7 +16,29 @@ public class Path {
     }
 
     public String getPathInstructions() {
-        return path.toString();
+        if (path == null || path.length() == 0) {
+            return "";
+        }
+
+        StringBuilder instructions = new StringBuilder();
+        int count = 0;
+
+        for (int i = 0; i< path.length(); i++) {
+            char currentChar = path.charAt(i);
+
+            if (Character.isDigit(currentChar)) {
+                count = count * 10 + (currentChar - '0');
+            } else if (currentChar == 'F' || currentChar == 'R' || currentChar == 'L' || currentChar == 'R') {
+                int repeatCount = count == 0 ? 1 : count;
+                for (int j = 0; j < repeatCount; j++) {
+                    instructions.append(currentChar);
+                }
+                count = 0;
+            }
+
+            // all other characters are ignored
+        }
+        return instructions.toString();
     }
 
     public String getCanonicalPath(){
