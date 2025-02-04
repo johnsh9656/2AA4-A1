@@ -16,6 +16,9 @@ public class Position {
         return this.y;
     }
 
+    /*
+     * returns the position after moving in the given direction
+     */
     public Position move(Direction direction) {
         switch(direction){
             case NORTH:
@@ -31,6 +34,9 @@ public class Position {
         }
     }
 
+    /*
+     * checks if two positions are equal (have the same x and y coordinates)
+     */
     public boolean equals(Position pos){
         return this.x == pos.getX() && this.y == pos.getY();
     }

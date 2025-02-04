@@ -25,6 +25,7 @@ public class Main {
             Maze maze = new Maze(filePath);
 
             if (cmd.getOptionValue("p") != null) {
+                // check if user input path is valid
                 Path path = new Path(cmd.getOptionValue("p"));
                 if (maze.validatePath(path)) {
                     System.out.println("Path is valid");
@@ -32,6 +33,7 @@ public class Main {
                     System.out.println("Path is invalid");
                 }
             } else {
+                // provide factorized path for maze
                 MazeSolver solver = new RightHandSolver();
                 Path path = solver.solve(maze);
                 System.out.println("Found factorized path: " + path.getFactorizedPath());

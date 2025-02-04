@@ -15,6 +15,8 @@ public class Path {
         path.append(instruct);
     }
 
+    /* returns the raw path instructions, without spaces, numbers, or any other characters
+     */
     public String getPathInstructions() {
         if (path == null || path.length() == 0) {
             return "";
@@ -41,6 +43,9 @@ public class Path {
         return instructions.toString();
     }
 
+    /* 
+     * returns the canonical path, where each new character is preceded by a space
+     */
     public String getCanonicalPath(){
         if (path == null || path.length() == 0) {
             return "";
@@ -62,6 +67,10 @@ public class Path {
         return canonicalPath.toString();
     }
 
+    /* 
+     * returns the factorized path, where each character is preceded by 
+     * the number of times it is repeated, and followed by a space
+     */
     public String getFactorizedPath(){
         if (path == null || path.length() == 0) {
             return "";

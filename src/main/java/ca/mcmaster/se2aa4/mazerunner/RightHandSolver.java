@@ -6,6 +6,10 @@ import org.apache.logging.log4j.Logger;
 public class RightHandSolver implements MazeSolver {
     private static final Logger logger = LogManager.getLogger();
     
+    /*  solves the maze using the right hand rule
+        parameters - maze
+        returns - path from maze entry to exit
+    */
     @Override
     public Path solve(Maze maze){
         Path path = new Path();

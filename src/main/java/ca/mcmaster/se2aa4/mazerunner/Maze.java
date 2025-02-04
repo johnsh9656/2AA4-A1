@@ -74,10 +74,14 @@ public class Maze  {
         throw new Exception("No entrance found in maze");
     }
 
+    /*  returns maze entry position
+    */
     public Position getEntry() {
         return this.entry;
     }
 
+    /*  returns maze exit position
+    */
     public Position getExit() {
         return this.exit;
     }
@@ -90,6 +94,10 @@ public class Maze  {
         return maze.get(x).get(y);
     }
 
+    /*  returns if position is a wall
+        parameters - position
+        returns - true if wall, false if path
+    */
     public boolean isWall(Position pos) {
         return maze.get(pos.getY()).get(pos.getX()) == 0;
     }
@@ -105,6 +113,10 @@ public class Maze  {
         } 
     }
 
+    /*  validates path for maze
+        parameters - path
+        returns - true if path is valid, false if invalid
+    */
     public boolean validatePath(Path path) {
         Position currentPos = this.entry;
         DirectionManager directionManager = new DirectionManager();
