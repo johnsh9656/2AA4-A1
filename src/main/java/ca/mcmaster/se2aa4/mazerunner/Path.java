@@ -8,7 +8,7 @@ public class Path {
     }
 
     public Path(String path) {
-        this.path = new StringBuilder(path);
+        this.path = new StringBuilder(path == null ? "" : path);
     }
 
     public void addInstruction(String instruct){
