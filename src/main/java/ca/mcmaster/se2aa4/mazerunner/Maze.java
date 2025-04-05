@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import ca.mcmaster.se2aa4.mazerunner.commands.MoveForwardCommand;
-import ca.mcmaster.se2aa4.mazerunner.commands.TurnLeftCommand;
-import ca.mcmaster.se2aa4.mazerunner.commands.TurnRightCommand;
+import ca.mcmaster.se2aa4.mazerunner.commands.*;
+import ca.mcmaster.se2aa4.mazerunner.states.*;
 
 public class Maze  {
     private static final Logger logger = LogManager.getLogger(Maze.class);
@@ -117,43 +116,33 @@ public class Maze  {
         } 
     }
 
+    public boolean isOutOfBounds(Position pos) {
+        return (pos.getX() >= this.maze.getFirst().size() || 
+            pos.getY() >= this.maze.size() || 
+            pos.getX() < 0 || pos.getY() < 0);
+    }
+
     /*  validates path for maze
         parameters - path
         returns - true if path is valid, false if invalid
     */
     public boolean validatePath(Path path) {
-        Position currentPos = this.entry;
+        MazeSolverContext context = new MazeSolverContext(this);
+        context.setCurrentPosition(this.entry);
         
-
-        DirectionManager directionManager = new DirectionManager();
-
         for (char c : path.getPathInstructions().toCharArray()) {
-            switch (c) {
-                case 'F':
-                    currentPos = currentPos.move(directionManager.getCurrentDir());
-
-                    if (currentPos.getX() >= this.maze.getFirst().size() || 
-                        currentPos.getY() >= this.maze.size() || 
-                        currentPos.getX() < 0 || currentPos.getY() < 0) {
-                        // out of bounds
-                        return false;
-                    }
-
-                    if (isWall(currentPos)) {
-                        // hit a wall
-                        return false;
-                    }
-                    break;
-                case 'R':
-                    directionManager.setCurrentDir(directionManager.turnRight());
-                    break;
-                case 'L':
-                    directionManager.setCurrentDir(directionManager.turnLeft());
-                    break;
-                default:
-                    return false;
+            Command command = switch (c) {
+                case 'F' -> new MoveForwardCommand();
+                case 'L' -> new TurnLeftCommand();
+                case 'R' -> new TurnRightCommand();
+                default -> null;
+            };
+    
+            if ((command == null || !command.execute(context)) || context.hitWall()) {
+                return false;
             }
         }
-        return currentPos.equals(this.exit);
+    
+        return context.getCurrentPosition().equals(this.getExit());
     }
 }

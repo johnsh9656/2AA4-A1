@@ -5,7 +5,7 @@ import ca.mcmaster.se2aa4.mazerunner.commands.*;
 
 public class TurnAroundState implements SolverState {
     @Override
-    public SolverState next(RightHandSolverContext context, Path path) {
+    public SolverState next(MazeSolverContext context, Path path) {
         new TurnRightCommand().execute(context);
         path.addInstruction("R");
         new TurnRightCommand().execute(context);

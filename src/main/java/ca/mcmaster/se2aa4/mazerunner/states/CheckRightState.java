@@ -5,7 +5,7 @@ import ca.mcmaster.se2aa4.mazerunner.commands.*;
 
 public class CheckRightState implements SolverState {
     @Override
-    public SolverState next(RightHandSolverContext context, Path path) {
+    public SolverState next(MazeSolverContext context, Path path) {
         DirectionManager dm = context.getDirectionManager();
         Direction rightDir = dm.turnRight();
         Position right = context.getCurrentPosition().move(rightDir);

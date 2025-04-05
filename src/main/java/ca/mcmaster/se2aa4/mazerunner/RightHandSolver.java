@@ -10,7 +10,7 @@ public class RightHandSolver implements MazeSolver {
     @Override
     public Path solve(Maze maze) {
         Path path = new Path();
-        RightHandSolverContext context = new RightHandSolverContext(maze);
+        MazeSolverContext context = new MazeSolverContext(maze);
         SolverState state = new CheckRightState();
 
         while (!context.getCurrentPosition().equals(maze.getExit())) {

@@ -5,7 +5,7 @@ import ca.mcmaster.se2aa4.mazerunner.commands.*;
 
 public class CheckForwardState implements SolverState {
     @Override
-    public SolverState next(RightHandSolverContext context, Path path) {
+    public SolverState next(MazeSolverContext context, Path path) {
         Position forward = context.getCurrentPosition().move(context.getDirectionManager().getCurrentDir());
 
         if (!context.getMaze().isWall(forward)) {

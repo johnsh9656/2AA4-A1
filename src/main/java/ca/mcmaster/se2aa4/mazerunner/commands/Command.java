@@ -1,7 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner.commands;
 
-import ca.mcmaster.se2aa4.mazerunner.RightHandSolverContext;
+import ca.mcmaster.se2aa4.mazerunner.MazeSolverContext;
 
 public interface Command {
-    boolean execute(RightHandSolverContext context);
+    boolean execute(MazeSolverContext context);
 }
