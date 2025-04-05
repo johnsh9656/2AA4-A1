@@ -19,6 +19,8 @@ public class Main {
 
         CommandLineParser parser = new DefaultParser();
 
+        
+
         try {
             CommandLine cmd = parser.parse(options, args);
             String filePath = cmd.getOptionValue("i");

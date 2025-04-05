@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import ca.mcmaster.se2aa4.mazerunner.commands.MoveForwardCommand;
+import ca.mcmaster.se2aa4.mazerunner.commands.TurnLeftCommand;
+import ca.mcmaster.se2aa4.mazerunner.commands.TurnRightCommand;
+
 public class Maze  {
     private static final Logger logger = LogManager.getLogger(Maze.class);
 
@@ -119,6 +123,8 @@ public class Maze  {
     */
     public boolean validatePath(Path path) {
         Position currentPos = this.entry;
+        
+
         DirectionManager directionManager = new DirectionManager();
 
         for (char c : path.getPathInstructions().toCharArray()) {
